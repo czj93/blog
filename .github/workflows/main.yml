@@ -56,5 +56,6 @@ jobs:
         rm: true
         source: "docs/.vuepress/dist/"
         target: "/var/www/blog"
+        strip_components: 3
 
 
