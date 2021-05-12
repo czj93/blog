@@ -54,7 +54,7 @@ jobs:
         password: ${{ secrets.SERVER_PASSWORD }}
         port: 22
         rm: true
-        source: "docs/.vuepress/dist/*"
+        source: "docs/.vuepress/dist/"
         target: "/var/www/blog"
 
 
