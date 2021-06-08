@@ -25,11 +25,9 @@ summary: 这篇文章主要用于记录 typeorm 使用过程中的各种坑及�
 
 
 
-![](D:\blog\docs\_posts\2021\images\nestjs-typeorm-01\20210608224942.jpg)
+![](./images/nestjs-typeorm-01/20210608224942.jpg)
 
-![](D:\blog\docs\_posts\2021\images\nestjs-typeorm-01\20210608225007.jpg)
-
-
+![](./images/nestjs-typeorm-01/20210608225007.jpg)
 
 ## 1.关于文档
 
