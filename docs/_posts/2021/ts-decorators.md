@@ -2,6 +2,7 @@
 title: TypeScript装饰器介绍
 date: 2021-05-12
 author: czj
+lang: zh-cn
 tags:
   - ts
   - decorator
@@ -383,4 +384,5 @@ class Test {
 由此可见：
 
 	1. 属性装饰器 > 参数装饰器 > 函数装饰器 > 类装饰器
+
  	2. 同一个目标同时有多个装饰器时，从下往上执行
