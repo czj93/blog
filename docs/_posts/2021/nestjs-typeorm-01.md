@@ -6,7 +6,7 @@ lang: zh-cn
 tags:
   - typeorm
   - nestjs
-summary: 这篇文章主要用于记录 typeorm 使用过程中的各种坑及吐槽....
+summary: 这篇文章主要用于记录 typeorm 使用过程中的一些优缺点
 ---
 
 
@@ -29,50 +29,18 @@ summary: 这篇文章主要用于记录 typeorm 使用过程中的各种坑及�
 
 ![](./images/nestjs-typeorm-01/20210608225007.jpg)
 
-## 1.关于文档
+## 优点
 
-[Typeorm官方文档]: https://typeorm.io/#/
-
-在我看来 Typeorm 的文档是阻碍我升入使用的最大障碍。
-
-Typeorm 的文档类似与一个 Tutorial，介绍了 Typeorm 中的一些的概念，以及一些常规的使用方法。
-
-其他很多开框架也都有类似的文档。但是 Typeorm 只有这个，没有其他的了。
-
-Tutorial 并不能覆盖开发中的所有问题。也无法详细的描述 Typeorm 所支持的 Api 及 参数。
-
-Typeorm 中多对 api 的使用仅仅只有一个示例。
+1.  支持 typescript
+2.  易于上手（简单的增删改查）
 
 
 
-文档不够全面是一方面，文档并不是那么准确。
+## 缺点
 
-#### 关于树实体文档
-
-[文档]: https://typeorm.io/#/tree-entities
-
-这部分介绍了 Typeorm 中支持的 4 种树结构，末尾介绍了树实体的使用。
-
-邻接表也包含在这部分中，然而照着文档去实现邻接表树，结果却是报错。
-
-经过一翻查找，原来 Tree 实体并不支持邻接表，当是文档中并没有注明。
-
-[issue]: https://github.com/typeorm/typeorm/issues/2540
-
-Github 的 issue 中也有人有相同的问题，但是文档却一直没有改进。。。。
-
-
-
-#### leftJoinAndMapOne
-
-看文档我还以为，没有通过 `Typeorm` 建立关联关系的的实体也能通过 `leftJoinAndMapOne` 联查。
-
-事实是，你不能。可以查询，但是结果并不能生成我们想要的实体结构。
-
-通过 `getRawMany` `getRawOne` 接口能获取到数据，但并不是我们想要的 实体结构，使用并不方便，使用 orm 的意义也就不存在了。
-
-
-
-
-
-到目前为止，为了实现一个评论功能，在 typeorm 这一关上卡了好久，问题不断 无处可查（只能是个人水平太差了），国内相关的资料也很少，官方文档就更指望不上了，查找 Issue 还有一些希望。
+1.  文档不清晰，只有教程式的文档，没有完整的 Api 文档
+2.  issue 积压太多
+3. 复杂SQL实现麻烦（文档对于构建复杂sql基本帮不上忙）
+4. 不支持软删除
+5. mysql 中使用 uuid 作为主键insert时会报错(不清楚是不是个人使用姿势不对)
+6. 文档中关于Tree一文中的临接表无法使用树实体，文档没有注明，容易产生误解
