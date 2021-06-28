@@ -16,7 +16,7 @@
       <div class="btn" @click="accountLogin">登 录</div>
     </template>
     <template v-else>
-
+      <div></div>
     </template>
     <span class="close" @click="$emit('close')">关闭</span>
   </div>
@@ -35,7 +35,7 @@ export default {
     accountLogin() {
       const { username, password } = this
       if(!username || !password) return alert('请输入账号密码')
-      fetch('http://localhost:3000/user/login', {
+      fetch('/api/user/login', {
         method: 'post',
         headers: {
           "Content-Type": "application/json"
