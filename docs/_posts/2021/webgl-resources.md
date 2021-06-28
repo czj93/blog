@@ -45,5 +45,6 @@ summary: 我学习 webgl 学习的一些资源
 - three.js
 - [oasis engine](https://oasisengine.cn/)
 
-
-<Comment-index article-id="webgl-resources" />
+<ClientOnly>
+  <Comment-index article-id="webgl-resources" />
+</ClientOnly>
