@@ -48,7 +48,7 @@ export default {
       .then(response => response.json())
       .then(data => {
         if(data.success) {
-          sessionStorage.setItem('czj-token', data.result)
+          localStorage.setItem('czj-token', data.result)
           this.$emit('logined', data.result)
           this.$emit('close')
         }

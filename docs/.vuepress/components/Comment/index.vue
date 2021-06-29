@@ -37,6 +37,10 @@ export default {
       loginVisible: false
     }
   },
+  created() {
+    const token = localStorage.getItem('czj-token')
+    if(token) this.token = token
+  },
   methods: {
     loginHandle() {
       this.loginVisible = true
