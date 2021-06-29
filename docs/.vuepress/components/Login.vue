@@ -2,7 +2,7 @@
   <div class="login-wrap">
     <div class="tabs">
       <span :class="{ active: activeTab === 1 }" @click="activeTab = 1">密码登录</span>
-      <span :class="{ active: activeTab === 2 }" @click="activeTab = 2">微信扫码</span>
+      <span :class="{ active: activeTab === 2 }" @click="activeTab = 2">第三方登录</span>
     </div>
     <template v-if="activeTab === 1">
       <div class="form-item">
@@ -16,7 +16,9 @@
       <div class="btn" @click="accountLogin">登 录</div>
     </template>
     <template v-else>
-      <div></div>
+      <div class="tac">
+        <a :href="`https://github.com/login/oauth/authorize?client_id=b469a6f3a77aeef6aea1&redirect_uri=${redirect_uri}`">点击Github第三方登录</a>
+      </div>
     </template>
     <span class="close" @click="$emit('close')">关闭</span>
   </div>
@@ -28,10 +30,29 @@ export default {
     return {
       username: '',
       password: '',
-      activeTab: 1
+      activeTab: 1,
+      redirect_uri: '',
     }
   },
+  created() {
+    this.redirect_uri = encodeURIComponent(`https://caozj.cn/blog/redirect?url=${location.href}`)
+    this.codeLogin()
+  },
   methods: {
+    codeLogin() {
+      const { code } = this.$route.query
+      if(code) {
+        fetch(`/api/oauth/login?code=${code}`, {
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+        .then(response => response.json())
+        .then(data => {
+          this.loginSuccess(data)
+        })
+      }
+    },
     accountLogin() {
       const { username, password } = this
       if(!username || !password) return alert('请输入账号密码')
@@ -47,12 +68,17 @@ export default {
       })
       .then(response => response.json())
       .then(data => {
-        if(data.success) {
-          localStorage.setItem('czj-token', data.result)
-          this.$emit('logined', data.result)
-          this.$emit('close')
-        }
+        this.loginSuccess(data)
       })
+    },
+    loginSuccess(data) {
+      if(data.success) {
+        localStorage.setItem('czj-token', data.result)
+        this.$emit('logined', data.result)
+        this.$emit('close')
+      } else {
+        alert(data.message)
+      }
     }
   }
 }

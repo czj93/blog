@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <title>跳转中</title>
+  <script>
+    function param(o, e){
+      var n = new RegExp("(?:&|/?)"+e+"=([^&$]+)").exec(o);
+      return n ? n[1] : ""
+    }
+    var code = param(location.search, "code")
+    var url = param(location.search, "url")
+    if (param(location.search, "url") && code) {
+      location.href = url + '?code=' + code
+    }
+  </script>
+  <body></body>
+</html>
