@@ -26,6 +26,12 @@
 <script>
 export default {
   name: 'Login',
+  props: {
+    baseUrl: {
+      type: String,
+      required: true,
+    }
+  },
   data() {
     return {
       username: '',
@@ -42,7 +48,7 @@ export default {
     codeLogin() {
       const { code } = this.$route.query
       if(code) {
-        fetch(`/api/oauth/login?code=${code}`, {
+        fetch(`${this.baseUrl}/oauth/login?code=${code}`, {
           headers: {
             "Content-Type": "application/json"
           }
@@ -56,7 +62,7 @@ export default {
     accountLogin() {
       const { username, password } = this
       if(!username || !password) return alert('请输入账号密码')
-      fetch('/api/user/login', {
+      fetch(`${this.baseUrl}/user/login`, {
         method: 'post',
         headers: {
           "Content-Type": "application/json"

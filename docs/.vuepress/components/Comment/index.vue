@@ -8,10 +8,15 @@
       ref="comment"
       @login="loginHandle"
       :token="token"
-      base-url="/api"
+      :base-url="api"
       :article-id="articleId"
     />
-    <Login v-if="loginVisible" @close="loginVisible = false" @logined="loginedHandle" />
+    <Login
+      v-if="loginVisible"
+      :base-url="api"
+      @logined="loginedHandle"
+      @close="loginVisible = false"
+    />
   </div>
 </template>
 <script>
@@ -33,6 +38,7 @@ export default {
   },
   data() {
     return {
+      api: process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:3000',
       token: '',
       loginVisible: false
     }
