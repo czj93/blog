@@ -67,3 +67,8 @@ this.$emit('input', value)
 [5]: /img/bVNZvP
 [6]: https://cn.vuejs.org/
 [7]: https://cn.vuejs.org/v2/guide/components.html#%E4%BD%BF%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6%E7%9A%84%E8%A1%A8%E5%8D%95%E8%BE%93%E5%85%A5%E7%BB%84%E4%BB%B6
+
+
+<ClientOnly>
+  <Comment-index article-id="vue-directive-v-model" />
+</ClientOnly>

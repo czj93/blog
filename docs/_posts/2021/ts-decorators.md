@@ -386,3 +386,8 @@ class Test {
 	1. 属性装饰器 > 参数装饰器 > 函数装饰器 > 类装饰器
 
  	2. 同一个目标同时有多个装饰器时，从下往上执行
+
+
+<ClientOnly>
+  <Comment-index article-id="ts-decorators" />
+</ClientOnly>
