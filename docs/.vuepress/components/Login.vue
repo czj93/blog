@@ -99,6 +99,7 @@ export default {
   border-radius: 8px;
   transform: translate(-50%, -50%);
   box-shadow: 0 0 10px #ccc;
+  z-index: 999;
 }
 .form-item {
   margin-bottom: 16px;
