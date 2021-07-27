@@ -18,7 +18,7 @@ summary:
 
 ## 快速上手
 
-以下的内容都是基于 `Vue` 技术栈
+以下的内容都是基于 `Vue` 技术栈 [demo](https://github.com/czj93/micro-front-app)
 
 ### 1. 创建主应用
 
