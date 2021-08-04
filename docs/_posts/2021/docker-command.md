@@ -116,6 +116,39 @@ docker pull bitnami/redis
 
 
 
+## mysql 安装与使用
+
+```sh
+# 安装docker
+curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
+
+# 当前用户添加docker组
+sudo usermod -aG docker [用户名]
+
+# 拉取最新docker镜像
+docker pull mysql:latest
+
+# 创建并运行mysql容器
+docker run -itd --name database -p 3306:3306 -e MYSQL_ROOT_PASSWORD=[密码] mysql
+
+# 查看运行中的docker容器
+docker ps
+
+# 进入容器
+docker exec -it database bash
+
+# 启动已停止容器
+docker start database
+```
+
+
+
+其他资料：
+
+1. [Docker 入门教程](https://www.ruanyifeng.com/blog/2018/02/docker-tutorial.html)
+
+
+
 <ClientOnly>
   <Comment-index article-id="docker-command" />
 </ClientOnly>
