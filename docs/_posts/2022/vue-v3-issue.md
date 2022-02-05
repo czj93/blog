@@ -1,5 +1,14 @@
-## 遇到的问题
+---
+title: Vue3+typescript+elemnt-plus填坑
+date: 2022-2-2
+author: czj
+lang: zh-cn
+tags:
+  - Vue
+summary: Vue3 typescript elemnt-plus 使用过程问题记录
+---
 
+## 遇到的问题
 
 
 ### 1.数据双向绑定不生效
