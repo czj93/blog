@@ -58,26 +58,26 @@ jobs:
   run-image:
     needs: [build]
     runs-on: ubuntu-latest
-      steps:
-        - name: Deploy docker
-          uses: appleboy/ssh-action@master
-          with:
-              host: ${{ secrets.REMOTE_HOST }}
-              username: ${{ secrets.REMOTE_USER }}
-                # key: ${{ secrets.SERVER_SSH_KEY }}
-              password: ${{ secrets.SERVER_PASSWORD }}
-              port: 22
-              script: |
-                # 停止旧版镜像
-                docker stop $(docker ps -q --filter ancestor=${{secrets.IMAGE_NAME}})
-                # 删除旧版容器
-                docker rm -f $(docker ps -a --filter ancestor=${{secrets.IMAGE_NAME}})
-                # 删除旧版镜像
-                docker rmi -f $(docker images -q ancestor=${{secrets.IMAGE_NAME}}:latest)
-                # 拉取 latest 版镜像
-                docker pull ${{secrets.DOCKER_HUB_HOST}}/${{secrets.DOCKER_HUB_NAMESPACE}}/${{secrets.IMAGE_NAME}}:latest
-                # 运行 latest 版镜像
-                docker run --name blog -d -p 8081:80 ${{secrets.IMAGE_NAME}}:latest
+    steps:
+    - name: Deploy docker
+      uses: appleboy/ssh-action@master
+      with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+            # key: ${{ secrets.SERVER_SSH_KEY }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          port: 22
+          script: |
+            # 停止旧版镜像
+            docker stop $(docker ps -q --filter ancestor=${{secrets.IMAGE_NAME}})
+            # 删除旧版容器
+            docker rm -f $(docker ps -a --filter ancestor=${{secrets.IMAGE_NAME}})
+            # 删除旧版镜像
+            docker rmi -f $(docker images -q ancestor=${{secrets.IMAGE_NAME}}:latest)
+            # 拉取 latest 版镜像
+            docker pull ${{secrets.DOCKER_HUB_HOST}}/${{secrets.DOCKER_HUB_NAMESPACE}}/${{secrets.IMAGE_NAME}}:latest
+            # 运行 latest 版镜像
+            docker run --name blog -d -p 8081:80 ${{secrets.IMAGE_NAME}}:latest
 
     #- name: Send to server
     #  uses: appleboy/scp-action@master
