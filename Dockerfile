@@ -1,4 +1,4 @@
-FROM nginx:lastest
+FROM nginx
 
 WORKDIR /usr/share/nginx/html
 COPY deploy/default.conf /etc/nginx/conf.d/
