@@ -52,6 +52,9 @@ jobs:
     - name: Login to Tencent registry
       run: docker login --username=${{secrets.DOCKER_HUB_USERNAME}} --password=${{secrets.DOCKER_HUB_PASSWORD}} ${{secrets.DOCKER_HUB_HOST}}
 
+    - name: Image Add Tag
+      run: docker tag $(docker images -q ancestor=${{secrets.IMAGE_NAME}}:latest) ${{secrets.DOCKER_HUB_HOST}}/${{secrets.DOCKER_HUB_NAMESPACE}}/${{secrets.IMAGE_NAME}}:latest
+
     - name: Push Image
       run: docker push ${{secrets.DOCKER_HUB_HOST}}/${{secrets.DOCKER_HUB_NAMESPACE}}/${{secrets.IMAGE_NAME}}:latest
 
