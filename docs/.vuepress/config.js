@@ -2,7 +2,7 @@ module.exports = {
   title: 'Czj的博客',
   description: '',
   theme: '@vuepress/blog',
-  base: '/blog/',
+  base: '/',
   head: [
     [ 'script', { type: 'text/javascript' }, `
       var _hmt = _hmt || [];
