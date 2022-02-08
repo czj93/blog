@@ -214,6 +214,8 @@ jobs:
             # TODO: docker images -q 获取镜像id命令存在错误，改为通过名称删除，通过id删除和镜像名称删除的区别？？
             #docker rmi -f $(docker images -q ancestor=${{secrets.DOCKER_HUB_HOST}}/${{secrets.DOCKER_HUB_NAMESPACE}}/${{secrets.IMAGE_NAME}}:latest)
             docker rmi -f ${{secrets.DOCKER_HUB_HOST}}/${{secrets.DOCKER_HUB_NAMESPACE}}/${{secrets.IMAGE_NAME}}
+            #登录镜像仓库 腾讯镜像仓库拉取镜像前需要先登录
+            docker login --username=${{secrets.DOCKER_HUB_USERNAME}} --password=${{secrets.DOCKER_HUB_PASSWORD}} ${{secrets.DOCKER_HUB_HOST}}
             # 拉取 latest 版镜像
             docker pull ${{secrets.DOCKER_HUB_HOST}}/${{secrets.DOCKER_HUB_NAMESPACE}}/${{secrets.IMAGE_NAME}}:latest
             # 运行 latest 版镜像
