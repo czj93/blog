@@ -61,6 +61,8 @@ git init
    ```shell
    # 撤销提交 提交内容保留到工作区
    git reset --soft <版本号>
+
+   git reset --soft HEAD^
    
    # 撤销提交 回退到指定版本 内容不会保留在工作区
    git reset --hard <版本号>
@@ -89,3 +91,5 @@ git init
 ## 常见场景及操作
 
 // todo
+
+1. [提交后修改用户信息](https://www.cnblogs.com/zh7791/p/12986083.html)
