@@ -59,9 +59,22 @@ summary: 这篇文章主要用于记录 typeorm 使用过程中的一些优缺�
    }
    ```
 
+  这个问题原因找到了，要把 id 的类型改为 ==string== ...
    
 
 2.  leftJoinAndMapMany 中使用子查询，结果无法正确映射到属性 [issue](https://github.com/typeorm/typeorm/issues/3063), 可以使用 getRawMany 获得原始结果
+
+
+3.  Incorrect datetime value: '0000-00-00 00:00:00' for column 'datetime'
+定义datetime类型列，启动服务报错
+
+解决办法，设置 nullable=true
+
+@Column({
+  type: 'datetime',
+  nullable: true,
+})
+datetime: string;
 
 <ClientOnly>
   <Comment-index article-id="nestjs-typeorm-01" />
