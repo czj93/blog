@@ -41,4 +41,11 @@ module.exports = {
       ]
     }
   },
+  configureWebpack: {
+    resolve: {
+      alias: {
+        '@images': './images'
+      }
+    }
+  }
 }
