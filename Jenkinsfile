@@ -88,7 +88,7 @@ pipeline {
           remote.password = "${REMOTE_PASSWORD}"
           remote.allowAnyHosts = true
 
-          sshCommand remote: remote, command: "
+          sshCommand remote: remote, command: """
             if [ -n \"\$(docker ps -q --filter ancestor=${DOCKER_FULL_IMAGE}:${DOCKER_IMAGE_TAG})\" ];
             then
               docker stop \$(docker ps -q --filter ancestor=${DOCKER_FULL_IMAGE});
@@ -98,7 +98,7 @@ pipeline {
 
             docker pull ${DOCKER_FULL_IMAGE}:${DOCKER_IMAGE_TAG};
             docker run --name ${TCR_REPOSITORY_NAME} -d -p 8081:80 ${DOCKER_FULL_IMAGE}:${DOCKER_IMAGE_TAG};
-          "
+          """
 
           // sshCommand remote: remote, command: "docker rm -f $(docker ps -q -a --filter ancestor=${DOCKER_FULL_IMAGE})"
 
