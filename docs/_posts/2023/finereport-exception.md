@@ -3,7 +3,7 @@ title:  帆软报表页面报错无法显示
 date: 2023-4-12
 author: czj
 lang: zh-cn
-summary: 帆软报表集成页面报错 Uncaught ReferenceError: getParamsTemplate is not defined 无法显示
+summary: 帆软报表集成页面报错 Uncaught ReferenceError getParamsTemplate is not defined 无法显示
 
 ---
 
