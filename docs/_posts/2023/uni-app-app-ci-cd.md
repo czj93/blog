@@ -70,6 +70,145 @@ mv manifest.json ../h5/static/
 
 将dist/build/h5 中的内容 和 nginx 一起打包成镜像，并重新部署即可
 
+添加打包脚本
+```sh
+#!/usr/bin/env bash
+
+cd /dist/build/app
+
+zip -r -q -D [appid].zip ./*
+
+mv [appid].zip [appid].wgt
+
+mv [appid].wgt ../h5/static/
+
+mv manifest.json ../h5/static/
+```
+
+在 package.json 中添加打包指令
+
+```
+"pack": "sh ./CICD/pack.sh",
+```
+
+构建
+```sh
+
+yarn
+
+npm run build:h5
+
+npm run build:app
+
+npm run pack
+
+## npm run pack 指令在jenkins 中构建报错
+## zip not found
+
+```
+
+由于 zip 指令在jenkins 中无法执行，改到 dockerfile 中来执行打包压缩过程
+经过尝试 dockerfile 中依然存在相同的问题
+
+终极解决办法，使用node.js 来打包压缩
+
+添加 archiver
+```
+{
+ “scripts”: {
+    "zip": "node ./zip.js"
+  },
+  “devDependencies”: {
+    "archiver": "^5.3.1"
+  }
+}
+```
+
+
+编写压缩打包代码
+```js
+const fs = require("fs");
+const archiver = require("archiver");
+
+const appid = "__UNI__3C008EF";
+
+const output = fs.createWriteStream(`${appid}.zip`);
+const archive = archiver("zip", {});
+
+archive.on("error", function (err) {
+    throw err;
+});
+
+output.on("close", function () {
+    console.log(`打包压缩完成`);
+});
+
+archive.pipe(output);
+archive.directory("./dist/build/app/", false);
+archive.finalize();
+
+```
+
+构建打包
+
+```sh
+yarn
+
+npm run build:h5
+
+npm run build:app
+
+npm run zip
+
+mv ./dist/build/app/manifest.json ./dist/build/h5/static/
+
+mv ./__UNI__3C008EF.zip ./dist/build/h5/static/__UNI__3C008EF.wgt
+```
 
 ## 客户端检测版本并下载升级
-wip
+
+```js
+    const serverUrl = ‘api-server’;
+
+    // 下载更新包 并 更新
+    const downloadApp = (url) => {
+      uni.showLoading({ title: '更新中' })
+      uni.downloadFile({
+        url: url,
+        success: (downloadResult) => {
+          uni.hideLoading()
+          if (downloadResult.statusCode === 200) {
+            plus.runtime.install(downloadResult.tempFilePath, {
+              force: false
+            }, function () {
+              console.log('install success...');
+              plus.runtime.restart();
+            }, function (e) {
+              uni.showToast({
+                title: "更新失败",
+                icon: "none",
+              })
+			  console.log(e)
+              console.error('install fail...');
+            });
+          }
+        }
+      });
+    }
+
+    // 获取到最新的版本信息
+    const getDevVersionData = () => {
+      uni.request({
+        url: `${serverUrl}/static/manifest.json`,
+        success: (result) => {
+          var { data } = result
+          devVersion.value.value = data.version.name
+          devVersion.value.code = data.version.code
+          // 对比当前版本 与 服务端最新版本 大小
+          if() {
+            downloadApp(`${serverUrl}/static/[appid].wgt `)
+          }
+        }
+      })
+    }
+```
